@@ -93,7 +93,7 @@ function showMenu() {
             choices: [
                 'Add Engineer',
                 'Add Intern',
-                'Exit'
+                'Finish Building Team'
             ]
         }
     ]).then(({ option }) => {
@@ -114,7 +114,7 @@ function showMenu() {
                 });
                 break;
 
-            case 'Exit':
+            case 'Finish Building Team':
                 // Pass array to render function
                 let outputHTML=render(teamMembersArray);
 
