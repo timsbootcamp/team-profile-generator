@@ -33,3 +33,12 @@ console.log(manager.getOfficeNumber());
 console.log(manager.getRole()); // 
 
 
+// Test Data for Engineer class
+
+const engineer = new Engineer('Peter Jones', 3, 'peterjones@gmail.com.com', 'pete');
+
+console.log(engineer.getName()); 
+console.log(engineer.getId()); 
+console.log(engineer.getEmail()); 
+console.log(engineer.getGitHub());
+console.log(engineer.getRole()); 
