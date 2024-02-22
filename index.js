@@ -57,7 +57,7 @@ console.log(intern.getRole());
 
 
 // Declare array of questions for Manager
-const createManager = () => {
+const addManager = () => {
 
     return inquirer.prompt([
         {
@@ -105,23 +105,23 @@ function showMenu() {
             type: 'list',
             message: 'Select an option:',
             choices: [
-                'Create Engineer',
-                'Create Intern',
+                'Add Engineer',
+                'Add Intern',
                 'Exit'
             ]
         }
     ]).then(({ option }) => {
         switch (option) {
-            case 'Create Engineer':
-                    createEngineer().then(engineer => {
+            case 'Add Engineer':
+                    addEngineer().then(engineer => {
                     console.log("Engineer Object:", engineer);
                     teamMembersArray.push(engineer);
                     showMenu();
                 });
                 break;
 
-            case 'Create Intern':
-                    createIntern().then(intern => {
+            case 'Add Intern':
+                    addIntern().then(intern => {
                     console.log("Intern Object:", intern);
                     teamMembersArray.push(intern);
                     showMenu();
@@ -138,7 +138,7 @@ function showMenu() {
 
 
 // Declare array of questions for Engineer
-const createEngineer = () => {
+const addEngineer = () => {
 
     return inquirer.prompt([
         {
@@ -178,7 +178,7 @@ const createEngineer = () => {
 
 
 // Declare array of questions for Intern
-const createIntern = () => {
+const addIntern = () => {
 
     return inquirer.prompt([
         {
@@ -235,7 +235,7 @@ function validateMandatoryDataInput(inputData, fieldName) {
 // entry function that will be called first. See below call.
 function main() {
 
-    createManager().then(manager => {
+    addManager().then(manager => {
          console.log("Manager Object:", manager);
          teamMembersArray.push(manager);
          showMenu();
