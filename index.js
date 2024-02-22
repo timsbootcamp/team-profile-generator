@@ -129,7 +129,16 @@ function showMenu() {
                 break;
 
             case 'Exit':
-                console.log(teamMembersArray);
+                //console.log(teamMembersArray);
+                let outputHTML=render(teamMembersArray);
+
+                // If output path does not exist then create it
+                if (!fs.existsSync(OUTPUT_DIR)) {
+                    fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+                }
+
+                // Write output HTML file
+                writeToFile(outputPath, outputHTML);    
                 console.log("Exiting...");
                 break;
         }
@@ -229,6 +238,20 @@ function validateMandatoryDataInput(inputData, fieldName) {
     }
 }
 
+
+function writeToFile(fileName, data) {
+
+    // Output file
+    fs.writeFile(fileName, data, err => {
+
+        // log any errors
+        if (err) {
+            console.error(err);
+        } else {
+            console.log(`'${fileName}' has been created successfully`)
+        }
+    });
+}
 
 
 
