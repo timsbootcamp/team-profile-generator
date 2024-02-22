@@ -1,3 +1,4 @@
+// require declarations - BEGIN
 const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
@@ -5,55 +6,19 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
+// require declarations - END
 
+
+// Constants for output - BEGIN
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./src/page-template.js");
+// Constants for output - BEGIN
 
 
-// TODO: Write Code to gather information about the development team members, and render the HTML file.
-
-const teamMembersArray = []; 
-
-// Test Data for Employee class
-const emp = new Employee('Tim Anand', 1, 'timanand@gmail.com');
-
-console.log(emp.getName()); 
-console.log(emp.getId()); 
-console.log(emp.getEmail()); 
-console.log(emp.getRole()); 
-
-
-// Test Data for Manager class
-const manager = new Manager('Sarah', 2, 'sarahsmith@gmail.com', '51');
-
-console.log(manager.getName()); 
-console.log(manager.getId()); 
-console.log(manager.getEmail()); 
-console.log(manager.getOfficeNumber()); 
-console.log(manager.getRole()); // 
-
-
-// Test Data for Engineer class
-const engineer = new Engineer('Peter Jones', 3, 'peterjones@gmail.com.com', 'pete');
-
-console.log(engineer.getName()); 
-console.log(engineer.getId()); 
-console.log(engineer.getEmail()); 
-console.log(engineer.getGithub());
-console.log(engineer.getRole()); 
-
-
-// Test Data for Intern class
-const intern = new Intern('Tanya', 2, 'tanya@gmail.com', 'edX Online Bootcamp');
-
-console.log(intern.getName());
-console.log(intern.getId());
-console.log(intern.getEmail());
-console.log(intern.getSchool());
-console.log(intern.getRole());
-
+// Array that holds manager, engineer(s), intern(s) after user input
+let teamMembersArray = []; 
 
 
 // Declare array of questions for Manager
@@ -117,6 +82,7 @@ const addManager = () => {
 
 
 
+// Display menu for user to add one or more Engineer / Intern
 function showMenu() {
     console.log("\nWelcome to the Command Prompt Menu:");
     inquirer.prompt([
@@ -149,7 +115,7 @@ function showMenu() {
                 break;
 
             case 'Exit':
-                //console.log(teamMembersArray);
+                // Pass array to render function
                 let outputHTML=render(teamMembersArray);
 
                 // If output path does not exist then create it
@@ -287,6 +253,7 @@ const addIntern = () => {
 
 
 
+// Function to validate email addresses
 function validateEmail(emailAddress) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(emailAddress)) {
@@ -296,6 +263,7 @@ function validateEmail(emailAddress) {
 }
 
 
+// Function to write output to file
 function writeToFile(fileName, data) {
 
     // Output file
