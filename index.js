@@ -123,7 +123,7 @@ const createEngineer = () => {
         },
 
         {
-            // Prompt Manager's Office Number for input
+            // Prompt Manager's Git Hub for input
             name: 'gitHub',
             type: 'input',
             message: 'Git Hub: ?',
@@ -132,6 +132,48 @@ const createEngineer = () => {
 
     ]).then(answers => new Engineer(answers.name, answers.employeeId, answers.emailAddress, answers.gitHub));
 };
+
+
+// Declare array of questions for Intern
+const createIntern = () => {
+
+    return inquirer.prompt([
+        {
+            // Prompt Intern's Name for input
+            name: 'name',
+            type: 'input',
+            message: 'What is the name of Intern?',
+            validate: inputTitle => { return validateMandatoryDataInput(inputTitle, "Intern's Name") }
+        },
+
+        {
+            // Prompt Intern's Employee ID for input
+            name: 'employeeId',
+            type: 'input',
+            message: 'Employee ID: ?',
+            validate: inputTitle => { return validateMandatoryDataInput(inputTitle, "Employee ID") }
+        },
+
+        {
+            // Prompt Intern's Email Address for input
+            name: 'emailAddress',
+            type: 'input',
+            message: 'Email Address: ?',
+            validate: inputTitle => { return validateMandatoryDataInput(inputTitle, "Email Address") }
+        },
+
+        {
+            // Prompt Intern's School for input
+            name: 'school',
+            type: 'input',
+            message: 'School: ?',
+            validate: inputTitle => { return validateMandatoryDataInput(inputTitle, "School") }
+        },
+
+    ]).then(answers => new Intern(answers.name, answers.employeeId, answers.emailAddress, answers.school));
+};
+
+
 
 
 
@@ -155,8 +197,12 @@ function main() {
     //     console.log("Manager Object:", manager);
     // });
     
-    createEngineer().then(engineer => {
-        console.log("Engineer Object:", engineer);
+    // createEngineer().then(engineer => {
+    //     console.log("Engineer Object:", engineer);
+    // });
+
+    createIntern().then(intern => {
+         console.log("Intern Object:", intern);
     });
 
 }
