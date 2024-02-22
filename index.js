@@ -54,7 +54,7 @@ console.log(intern.getRole());
 
 
 
-// Declare array of questions for user
+// Declare array of questions for Manager
 const createManager = () => {
 
     return inquirer.prompt([
@@ -91,10 +91,48 @@ const createManager = () => {
         },
 
     ]).then(answers => new Manager(answers.name, answers.employeeId, answers.emailAddress, answers.officeNumber));
-
-
-
 };
+
+
+// Declare array of questions for Engineer
+const createEngineer = () => {
+
+    return inquirer.prompt([
+        {
+            // Prompt Engineer's Name for input
+            name: 'name',
+            type: 'input',
+            message: 'What is the name of Engineer?',
+            validate: inputTitle => { return validateMandatoryDataInput(inputTitle, "Engineer's Name") }
+        },
+
+        {
+            // Prompt Engineer's Employee ID for input
+            name: 'employeeId',
+            type: 'input',
+            message: 'Employee ID: ?',
+            validate: inputTitle => { return validateMandatoryDataInput(inputTitle, "Employee ID") }
+        },
+
+        {
+            // Prompt Manager's Email Address for input
+            name: 'emailAddress',
+            type: 'input',
+            message: 'Email Address: ?',
+            validate: inputTitle => { return validateMandatoryDataInput(inputTitle, "Email Address") }
+        },
+
+        {
+            // Prompt Manager's Office Number for input
+            name: 'gitHub',
+            type: 'input',
+            message: 'Git Hub: ?',
+            validate: inputTitle => { return validateMandatoryDataInput(inputTitle, "Git Hub") }
+        },
+
+    ]).then(answers => new Engineer(answers.name, answers.employeeId, answers.emailAddress, answers.gitHub));
+};
+
 
 
 function validateMandatoryDataInput(inputData, fieldName) {
@@ -113,10 +151,13 @@ function validateMandatoryDataInput(inputData, fieldName) {
 function main() {
     //questions()
 
-    createManager().then(manager => {
-        console.log("Manager Object:", manager);
-    });
+    // createManager().then(manager => {
+    //     console.log("Manager Object:", manager);
+    // });
     
+    createEngineer().then(engineer => {
+        console.log("Engineer Object:", engineer);
+    });
 
 }
 
