@@ -14,6 +14,8 @@ const render = require("./src/page-template.js");
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
 
+const teamMembersArray = []; 
+
 // Test Data for Employee class
 const emp = new Employee('Tim Anand', 1, 'timanand@gmail.com');
 
@@ -92,6 +94,47 @@ const createManager = () => {
 
     ]).then(answers => new Manager(answers.name, answers.employeeId, answers.emailAddress, answers.officeNumber));
 };
+
+
+
+function showMenu() {
+    console.log("\nWelcome to the Command Prompt Menu:");
+    inquirer.prompt([
+        {
+            name: 'option',
+            type: 'list',
+            message: 'Select an option:',
+            choices: [
+                'Create Engineer',
+                'Create Intern',
+                'Exit'
+            ]
+        }
+    ]).then(({ option }) => {
+        switch (option) {
+            case 'Create Engineer':
+                    createEngineer().then(engineer => {
+                    console.log("Engineer Object:", engineer);
+                    teamMembersArray.push(engineer);
+                    showMenu();
+                });
+                break;
+
+            case 'Create Intern':
+                    createIntern().then(intern => {
+                    console.log("Intern Object:", intern);
+                    teamMembersArray.push(intern);
+                    showMenu();
+                });
+                break;
+
+            case 'Exit':
+                console.log(teamMembersArray);
+                console.log("Exiting...");
+                break;
+        }
+    });
+}
 
 
 // Declare array of questions for Engineer
@@ -191,20 +234,12 @@ function validateMandatoryDataInput(inputData, fieldName) {
 
 // entry function that will be called first. See below call.
 function main() {
-    //questions()
 
-    // createManager().then(manager => {
-    //     console.log("Manager Object:", manager);
-    // });
-    
-    // createEngineer().then(engineer => {
-    //     console.log("Engineer Object:", engineer);
-    // });
-
-    createIntern().then(intern => {
-         console.log("Intern Object:", intern);
+    createManager().then(manager => {
+         console.log("Manager Object:", manager);
+         teamMembersArray.push(manager);
+         showMenu();
     });
-
 }
 
 
