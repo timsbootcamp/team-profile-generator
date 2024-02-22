@@ -64,32 +64,52 @@ const addManager = () => {
             // Prompt Manager's Name for input
             name: 'name',
             type: 'input',
-            message: 'What is the name of manager?',
-            validate: inputTitle => { return validateMandatoryDataInput(inputTitle, "Manager's Name") }
+            message: 'What is the name of Manager?',
+            validate: input => { 
+                if (!input) {
+                    return "Please enter the name of Manager.";
+                }  
+                return true;
+            }
         },
 
         {
             // Prompt Manager's Employee ID for input
             name: 'employeeId',
             type: 'input',
-            message: 'Employee ID: ?',
-            validate: inputTitle => { return validateMandatoryDataInput(inputTitle, "Employee ID") }
+            message: 'Employee ID:?',
+            validate: input => { 
+                if (!input) {
+                    return "Please enter the Manager's Employee ID.";
+                } 
+                return true;
+            }
         },
 
         {
             // Prompt Manager's Email Address for input
             name: 'emailAddress',
             type: 'input',
-            message: 'Email Address: ?',
-            validate: inputTitle => { return validateMandatoryDataInput(inputTitle, "Email Address") }
+            message: 'Email Address:?',
+            validate: input => { 
+                if (!input) {
+                    return "Please enter the Manager's email address.";
+                }
+                return validateEmail(input);
+            }
         },
 
         {
             // Prompt Manager's Office Number for input
             name: 'officeNumber',
             type: 'input',
-            message: 'Office Number: ?',
-            validate: inputTitle => { return validateMandatoryDataInput(inputTitle, "Office Number") }
+            message: 'Office Number:?',
+            validate: input => { 
+                if (!input) {
+                    return "Please enter the Manager's Office Number.";
+                }
+                return true;
+            }
         },
 
     ]).then(answers => new Manager(answers.name, answers.employeeId, answers.emailAddress, answers.officeNumber));
@@ -155,31 +175,51 @@ const addEngineer = () => {
             name: 'name',
             type: 'input',
             message: 'What is the name of Engineer?',
-            validate: inputTitle => { return validateMandatoryDataInput(inputTitle, "Engineer's Name") }
+            validate: input => { 
+                if (!input) {
+                    return "Please enter the name of Engineer.";
+                }  
+                return true;
+            }
         },
 
         {
             // Prompt Engineer's Employee ID for input
             name: 'employeeId',
             type: 'input',
-            message: 'Employee ID: ?',
-            validate: inputTitle => { return validateMandatoryDataInput(inputTitle, "Employee ID") }
+            message: 'Employee ID:?',
+            validate: input => { 
+                if (!input) {
+                    return "Please enter Engineer's Employee ID.";
+                }  
+                return true;
+            }
         },
 
         {
-            // Prompt Manager's Email Address for input
+            // Prompt Engineer's Email Address for input
             name: 'emailAddress',
             type: 'input',
-            message: 'Email Address: ?',
-            validate: inputTitle => { return validateMandatoryDataInput(inputTitle, "Email Address") }
+            message: 'Email Address:?',
+            validate: input => { 
+                if (!input) {
+                    return "Please enter the Engineer's email address.";
+                }
+                return validateEmail(input);
+            }
         },
 
         {
-            // Prompt Manager's Git Hub for input
+            // Prompt Engineer's Git Hub for input
             name: 'gitHub',
             type: 'input',
-            message: 'Git Hub: ?',
-            validate: inputTitle => { return validateMandatoryDataInput(inputTitle, "Git Hub") }
+            message: 'Git Hub:?',
+            validate: input => { 
+                if (!input) {
+                    return "Please enter the Engineer's GitHub.";
+                }  
+                return true;
+            }
         },
 
     ]).then(answers => new Engineer(answers.name, answers.employeeId, answers.emailAddress, answers.gitHub));
@@ -195,31 +235,51 @@ const addIntern = () => {
             name: 'name',
             type: 'input',
             message: 'What is the name of Intern?',
-            validate: inputTitle => { return validateMandatoryDataInput(inputTitle, "Intern's Name") }
+            validate: input => { 
+                if (!input) {
+                    return "Please enter the name of Intern.";
+                }  
+                return true;
+            }
         },
 
         {
             // Prompt Intern's Employee ID for input
             name: 'employeeId',
             type: 'input',
-            message: 'Employee ID: ?',
-            validate: inputTitle => { return validateMandatoryDataInput(inputTitle, "Employee ID") }
+            message: 'Employee ID:?',
+            validate: input => { 
+                if (!input) {
+                    return "Please enter the Intern's Employee ID.";
+                }  
+                return true;
+            }
         },
 
         {
             // Prompt Intern's Email Address for input
             name: 'emailAddress',
             type: 'input',
-            message: 'Email Address: ?',
-            validate: inputTitle => { return validateMandatoryDataInput(inputTitle, "Email Address") }
+            message: 'Email Address:?',
+            validate: input => { 
+                if (!input) {
+                    return "Please enter the Intern's email address.";
+                }
+                return validateEmail(input);
+            }
         },
 
         {
             // Prompt Intern's School for input
             name: 'school',
             type: 'input',
-            message: 'School: ?',
-            validate: inputTitle => { return validateMandatoryDataInput(inputTitle, "School") }
+            message: 'School:?',
+            validate: input => { 
+                if (!input) {
+                    return "Please enter the Intern's School.";
+                }  
+                return true;
+            }
         },
 
     ]).then(answers => new Intern(answers.name, answers.employeeId, answers.emailAddress, answers.school));
@@ -227,15 +287,12 @@ const addIntern = () => {
 
 
 
-
-
-function validateMandatoryDataInput(inputData, fieldName) {
-    if (inputData) {
-        return true;
-    } else {
-        console.log(`FAILED VALIDATION! - ${fieldName} is a mandatory field.`);
-        return false;
+function validateEmail(emailAddress) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailAddress)) {
+        return 'Please enter a valid email address.';
     }
+    return true;
 }
 
 
@@ -252,6 +309,7 @@ function writeToFile(fileName, data) {
         }
     });
 }
+
 
 
 
