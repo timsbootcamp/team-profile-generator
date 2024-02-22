@@ -2,7 +2,7 @@ const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
-//const inquirer = require("inquirer");
+const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 
@@ -51,3 +51,75 @@ console.log(intern.getId());
 console.log(intern.getEmail());
 console.log(intern.getSchool());
 console.log(intern.getRole());
+
+
+
+// Declare array of questions for user
+const createManager = () => {
+
+    return inquirer.prompt([
+        {
+            // Prompt Manager's Name for input
+            name: 'name',
+            type: 'input',
+            message: 'What is the name of manager?',
+            validate: inputTitle => { return validateMandatoryDataInput(inputTitle, "Manager's Name") }
+        },
+
+        {
+            // Prompt Manager's Employee ID for input
+            name: 'employeeId',
+            type: 'input',
+            message: 'Employee ID: ?',
+            validate: inputTitle => { return validateMandatoryDataInput(inputTitle, "Employee ID") }
+        },
+
+        {
+            // Prompt Manager's Email Address for input
+            name: 'emailAddress',
+            type: 'input',
+            message: 'Email Address: ?',
+            validate: inputTitle => { return validateMandatoryDataInput(inputTitle, "Email Address") }
+        },
+
+        {
+            // Prompt Manager's Office Number for input
+            name: 'officeNumber',
+            type: 'input',
+            message: 'Office Number: ?',
+            validate: inputTitle => { return validateMandatoryDataInput(inputTitle, "Office Number") }
+        },
+
+    ]).then(answers => new Manager(answers.name, answers.employeeId, answers.emailAddress, answers.officeNumber));
+
+
+
+};
+
+
+function validateMandatoryDataInput(inputData, fieldName) {
+    if (inputData) {
+        return true;
+    } else {
+        console.log(`FAILED VALIDATION! - ${fieldName} is a mandatory field.`);
+        return false;
+    }
+}
+
+
+
+
+// entry function that will be called first. See below call.
+function main() {
+    //questions()
+
+    createManager().then(manager => {
+        console.log("Manager Object:", manager);
+    });
+    
+
+}
+
+
+// entry function call.
+main();
